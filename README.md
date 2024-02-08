@@ -10,7 +10,7 @@ cd ../
 node main.js
 ```
 PASSWORD:
-- postgres password: <your-password>
+- postgres password: your password
 - diophant password: "diophant"
 
 To change the protocol of communication between the client and the server, 
