@@ -1,5 +1,5 @@
 ## RUN 
-
+Before using, download and install postgresql.
 ```
 npm i
 cd ./db
@@ -9,8 +9,7 @@ psql -d example -f data.sql -U diophant
 cd ../
 node main.js
 ```
-
-Before using, download and install postgresql.
+PASSWORD:
 - postgres password: <your-password>
 - diophant password: "diophant"
 
