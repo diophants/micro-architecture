@@ -23,8 +23,8 @@ module.exports = (routing, port, console) => {
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
       const { url, method, socket } = req;
-      const [name, id] = url.substring(1).split('/');
-      console.log(url, method, name);
+      const [name, id] = url.substring(2).split('/');
+      console.log(method);
       const entity = routing[name];
       if (!entity) return void res.end(`API not found ${name}`);
       const approach = crud[method.toLowerCase()];
@@ -36,7 +36,6 @@ module.exports = (routing, port, console) => {
       if (signature.includes('(id')) args.push(id);
       if (signature.includes('{')) args.push(await receivedArgs(req));
       console.log(`${socket.remoteAddress} ${method} ${url}`);
-      console.debug(args);
       const result = await handling(...args);
       res.statusCode = 200;
       res.end(JSON.stringify(result.rows));

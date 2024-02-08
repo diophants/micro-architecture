@@ -1,6 +1,8 @@
 module.exports = {
   api: {
     port: 8000,
+    // SWITCH PROTOCOL:
+    // transport: 'ws',
     transport: 'http',
   },
   static: {

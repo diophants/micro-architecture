@@ -16,4 +16,7 @@
   delete(id) {
     return db('users').delete(id);
   },
+  query(sql, args) {
+    return db('users').query(sql, args);
+  },
 });

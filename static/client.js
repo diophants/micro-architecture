@@ -9,6 +9,7 @@ transport.http = (url) => (structure) => {
     create: 'POST',
     update: 'PUT',
     delete: 'DELETE',
+    query: 'GET',
   };
   const services = Object.keys(structure);
   for (const name of services) {
@@ -27,7 +28,9 @@ transport.http = (url) => (structure) => {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(...args),
           };
-          if (crud[method] !== 'GET') params.push(head);
+          if (crud[method] !== 'GET') {
+            params.push(head);
+          }
           fetch(...params).then((res) => {
             resolve(res.json());
           });
@@ -68,6 +71,8 @@ const scaffold = (url) => {
 };
 
 (async () => {
+  // SWITCH PROTOCOL:
+  // const api = await scaffold('ws://localhost:8000/')({
   const api = await scaffold('http://localhost:8000/')({
     city: {
       read: ['id'],
@@ -87,12 +92,15 @@ const scaffold = (url) => {
       create: ['record'],
       update: ['id', 'record'],
       delete: ['id'],
+      query: ['sql', 'args'],
     },
   });
-  await api.user.update(14, {
-    login: 'andromed1',
-    password: 'pass',
-  });
+  // const users = await api.user.read();
+  // const lastUser = users.pop();
+  // const lastId = lastUser.id;
+  // await api.user.delete(lastId);
+  // await api.user.create({ login: 'Petya', password: 'password' });
+  // await api.user.update(3, { login: 'player1', password: 'root' });
   const result = await api.user.read();
   console.table(result);
 })();
